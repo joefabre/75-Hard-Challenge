@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>75 Hard Challenge Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="header-content">
+            <h1>75 Hard Challenge</h1>
+            <p class="subtitle">Transform Your Mind and Body in 75 Days</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section class="rules-section">
+            <div class="rules-header">
+                <h2>The 5 Rules</h2>
+                <button class="collapse-btn" id="rulesToggle">
+                    <span class="collapse-icon">−</span>
+                </button>
+            </div>
+            <div class="rules-content" id="rulesContent">
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3>1. Follow a Diet</h3>
+                    <p>Any diet of your choice - no cheat meals or alcohol for 75 days</p>
+                </div>
+                <div class="rule-card">
+                    <h3>2. Two Workouts</h3>
+                    <p>One must be outdoors, each at least 45 minutes long</p>
+                </div>
+                <div class="rule-card">
+                    <h3>3. Drink Water</h3>
+                    <p>1 gallon (3.8 liters) of water every day</p>
+                </div>
+                <div class="rule-card">
+                    <h3>4. Read 10 Pages</h3>
+                    <p>10 pages of a non-fiction book every day</p>
+                </div>
+                <div class="rule-card">
+                    <h3>5. Progress Photo</h3>
+                    <p>Take a progress photo every day</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section class="progress-section">
+            <h2>Progress Tracker</h2>
+            <div class="progress-header">
+                <div class="day-counter">
+                    <span class="day-number" id="currentDay">1</span>
+                    <span class="day-label">of 75 Days</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="daily-tracker">
+                <h3>Today's Tasks</h3>
+                <div class="tasks-grid">
+                    <div class="task-item">
+                        <input type="checkbox" id="diet" name="diet">
+                        <label for="diet">
+                            <span class="task-icon">🥗</span>
+                            <span class="task-text">Follow Diet (No Cheat Meals/Alcohol)</span>
+                        </label>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="workout1" name="workout1">
+                        <label for="workout1">
+                            <span class="task-icon">💪</span>
+                            <span class="task-text">Workout #1 (45+ minutes)</span>
+                        </label>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="workout2" name="workout2">
+                        <label for="workout2">
+                            <span class="task-icon">🏃</span>
+                            <span class="task-text">Outdoor Workout (45+ minutes)</span>
+                        </label>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="water" name="water">
+                        <label for="water">
+                            <span class="task-icon">💧</span>
+                            <span class="task-text">Drink 1 Gallon of Water</span>
+                        </label>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="reading" name="reading">
+                        <label for="reading">
+                            <span class="task-icon">📚</span>
+                            <span class="task-text">Read 10 Pages (Non-Fiction)</span>
+                        </label>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="photo" name="photo">
+                        <label for="photo">
+                            <span class="task-icon">📸</span>
+                            <span class="task-text">Take Progress Photo</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-navigation">
+                <button id="prevDay" class="nav-btn">← Previous Day</button>
+                <button id="nextDay" class="nav-btn">Next Day →</button>
+                <button id="showAnalytics" class="analytics-btn">📊 Analytics</button>
+                <button id="resetChallenge" class="reset-btn">🔄 Start Over</button>
+            </div>
+        </section>
+
+        <section class="calendar-section">
+            <h2>Calendar View</h2>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar days will be generated by JavaScript -->
+            </div>
+        </section>
+
+        <section class="completion-section" id="completionSection" style="display: none;">
+            <div class="completion-content">
+                <h2>🎉 CHALLENGE COMPLETED! 🎉</h2>
+                <p class="completion-message">Congratulations! You've successfully completed the 75 Hard Challenge!</p>
+                <p class="completion-stats">You've transformed your mind and body over 75 days of discipline and dedication.</p>
+                <button id="newChallenge" class="completion-btn">Start New Challenge</button>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h2>Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="completedDays">0</div>
+                    <div class="stat-label">Perfect Days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="streak">0</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completion">0%</div>
+                    <div class="stat-label">Overall Completion</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Analytics Modal -->
+    <div id="analyticsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📊 Analytics & Insights</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="analytics-grid">
+                    <!-- Progress Chart -->
+                    <div class="chart-container">
+                        <h3>Daily Progress Chart</h3>
+                        <canvas id="progressChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <!-- Task Completion Chart -->
+                    <div class="chart-container">
+                        <h3>Task Completion Rate</h3>
+                        <canvas id="taskChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <!-- Weekly Performance -->
+                    <div class="chart-container">
+                        <h3>Weekly Performance</h3>
+                        <canvas id="weeklyChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <!-- Insights Panel -->
+                    <div class="insights-panel">
+                        <h3>🔍 Insights & Recommendations</h3>
+                        <div id="insightsContent">
+                            <!-- Insights will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Stats -->
+                <div class="detailed-stats">
+                    <h3>📈 Detailed Statistics</h3>
+                    <div class="stats-row">
+                        <div class="stat-detail">
+                            <span class="stat-label">Best Week:</span>
+                            <span class="stat-value" id="bestWeek">-</span>
+                        </div>
+                        <div class="stat-detail">
+                            <span class="stat-label">Worst Week:</span>
+                            <span class="stat-value" id="worstWeek">-</span>
+                        </div>
+                        <div class="stat-detail">
+                            <span class="stat-label">Most Consistent Task:</span>
+                            <span class="stat-value" id="bestTask">-</span>
+                        </div>
+                        <div class="stat-detail">
+                            <span class="stat-label">Most Challenging Task:</span>
+                            <span class="stat-value" id="worstTask">-</span>
+                        </div>
+                        <div class="stat-detail">
+                            <span class="stat-label">Average Daily Completion:</span>
+                            <span class="stat-value" id="avgCompletion">-</span>
+                        </div>
+                        <div class="stat-detail">
+                            <span class="stat-label">Days Until Goal:</span>
+                            <span class="stat-value" id="daysToGo">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 by <strong>FABREulous Technology</strong></p>
+            <p class="footer-tagline">Building excellence, one day at a time</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
